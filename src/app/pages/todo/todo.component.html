@@ -1,1 +1,17 @@
-<p>todo works!</p>
+<div class="flex flex-col">
+  <div class="flex justify-between items-center">
+    <h2 class="font-bold text-xl">Manage Todos</h2>
+    <button class="btn btn-icon btn-rounded btn-primary">
+      <i class="ri-add-line ri-lg"></i>
+      Add Todo
+    </button>
+  </div>
+
+  <div class="mt-3 bg-white shadow">
+    @for (item of todos; track $index) {
+      <app-todo-card [type]="item.status" [todo]="item"></app-todo-card>
+      <app-todo-card [type]="item.status" [todo]="item"></app-todo-card>
+    }
+  </div>
+
+</div>

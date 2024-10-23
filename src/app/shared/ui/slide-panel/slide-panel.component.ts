@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './slide-panel.component.html',
-  styleUrl: './slide-panel.component.css'
+  styleUrl: './slide-panel.component.scss'
 })
 export class SlidePanelComponent {
 

@@ -1,5 +1,6 @@
-# TodoAppAngular17
+# Todo App Angular 17 (em desenvolvimento)
 
+To Do App é uma aplicação Front-end desenvolvida em Angular 17.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
 ## Development server

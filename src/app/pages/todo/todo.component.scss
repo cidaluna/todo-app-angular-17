@@ -1,0 +1,32 @@
+h1{
+  font-family: 'Roboto Bold', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.5rem;
+}
+
+h2{
+  font-family: 'Roboto Reg', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.5rem;
+}
+
+h3{
+  font-family: 'Playwrite Reg', cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.5rem;
+}
+
+button{
+  font-family: 'Playwrite Reg', cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.5rem;
+  &:hover{
+    background-color: red;
+  }
+}
+
+

@@ -1,5 +1,12 @@
-<section class="main" [ngClass]="{ hidden: false }">
-  <ul class="todo-list"> <!-- Import CommonModule for async  -->
+<section class="main" [ngClass]="{ hidden: noTodoClass$ | async }">
+  <!-- When all status isCompleted can collapse toggle-all -->
+   <input type="ckeckbox" id="toggle-all" class="toggle-all"
+   [checked]="isAllTodosSelected$ | async"
+   (change)="toggleAllTodos($event)"
+   />
+   <label for="toggle-all">Mark all as completed</label>
+  <ul class="todo-list">
+    <!-- Import CommonModule for async  -->
     <app-todo *ngFor="let item of visibleTodos$ | async" [todo]="item">
     </app-todo>
   </ul>

@@ -28,5 +28,6 @@ export class HeaderComponent {
     }
     console.log('addTodo:', this.title);
     this._todoService.addTodo(this.title);
+    this.title = "";
   }
 }

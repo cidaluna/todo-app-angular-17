@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { FilterEnum } from '../../shared/models/filter';
 import { ITodo } from '../../shared/models/todo';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { ITodo } from '../../shared/models/todo';
 export class TodoService {
 
   todos$ = new BehaviorSubject<ITodo[]>([]);
+  filter$ = new BehaviorSubject<FilterEnum>(FilterEnum.all);
 
   addTodo(title: string): void{
     const newTodo: ITodo = {

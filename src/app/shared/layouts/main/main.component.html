@@ -1,5 +1,6 @@
-<ul class="todo-list"> <!-- Import CommonModule for async  -->
-  <li *ngFor="let item of visibleTodos$ | async">
-    {{ item.title }}
-  </li>
-</ul>
+<section class="main" [ngClass]="{ hidden: false }">
+  <ul class="todo-list"> <!-- Import CommonModule for async  -->
+    <app-todo *ngFor="let item of visibleTodos$ | async" [todo]="item">
+    </app-todo>
+  </ul>
+</section>

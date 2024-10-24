@@ -2,18 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TodoService } from '../../../core/services/todo.service';
+import { TodoComponent } from "../../../pages/todo/todo.component";
 import { FilterEnum } from '../../models/filter';
 import { ITodo } from '../../models/todo';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TodoComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
   visibleTodos$: Observable<ITodo[]>;
+  noTodoClass$: Observable<boolean>; // verificar se mostra a seta collapsando os itens listados
 
   constructor(private _todoService: TodoService){
     this.visibleTodos$ = combineLatest(

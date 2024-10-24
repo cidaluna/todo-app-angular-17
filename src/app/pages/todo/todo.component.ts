@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ITodo } from '../../shared/models/todo';
 
 @Component({
   selector: 'app-todo',
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrl: './todo.component.scss'
 })
 export class TodoComponent {
+  @Input('todo') todoProps!: ITodo;
 
 }

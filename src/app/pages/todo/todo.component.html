@@ -1,1 +1,10 @@
-<li>{{ todoProps.title }} - {{ todoProps.isCompleted }}</li>
+<li [ngClass]="{editing: isEditingProps}">
+  <div class="view">
+    <input type="checkbox" class="toggle" id="title">
+    <label for="title" (dblclick)="setTodoInEditMode()">{{ todoProps.title }}</label>
+    <button class="destroy"></button>
+  </div>
+  <ng-container **ngIf="isEditingProps">
+    <input type="text" class="edit">
+  </ng-container>
+</li>

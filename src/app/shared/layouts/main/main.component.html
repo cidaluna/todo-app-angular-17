@@ -7,7 +7,11 @@
    <label for="toggle-all">Mark all as completed</label>
   <ul class="todo-list">
     <!-- Import CommonModule for async  -->
-    <app-todo *ngFor="let item of visibleTodos$ | async" [todo]="item">
+    <app-todo *ngFor="let item of visibleTodos$ | async"
+    [todo]="item"
+    [isEditing]="editingId === item.id"
+    (setEditingId)="setEditingId($event)"
+    >
     </app-todo>
   </ul>
 </section>

@@ -18,6 +18,7 @@ export class MainComponent {
   visibleTodos$: Observable<ITodo[]>;
   noTodoClass$: Observable<boolean>; // verificar se mostra a seta collapsando os itens listados
   isAllTodosSelected$: Observable<boolean>;
+  editingId: string | null = null;
 
   constructor(private _todoService: TodoService){
     this.isAllTodosSelected$ = this._todoService.todos$.pipe(map(
@@ -43,5 +44,9 @@ export class MainComponent {
   toggleAllTodos(event: Event):void{
     const target = event.target as HTMLInputElement;
     this._todoService.toggleAll(target.checked);
+  }
+
+  setEditingId(editingId: string | null): void{
+    this.editingId = editingId;
   }
 }

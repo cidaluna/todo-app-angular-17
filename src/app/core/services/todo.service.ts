@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FilterEnum } from '../../shared/models/filter';
+import { FilterEnum } from '../../shared/models/filter.enum';
 import { ITodo } from '../../shared/models/todo';
 
 @Injectable({
@@ -33,5 +33,10 @@ export class TodoService {
     );
     this.todos$.next(updatedTodos);
     console.log('updatedTodos: ', updatedTodos);
+  }
+
+  changeFilter(filterName: FilterEnum): void{
+    // Muda o filtro ativo, e avisa/emite um novo valor para todos os observadores inscritos.
+    this.filter$.next(filterName);
   }
 }

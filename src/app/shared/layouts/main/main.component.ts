@@ -4,7 +4,7 @@ import { combineLatest, map, Observable } from 'rxjs';
 import { TodoService } from '../../../core/services/todo.service';
 import { TodoComponent } from "../../../pages/todo/todo.component";
 import { TodosComponent } from '../../../pages/todos/todos.component';
-import { FilterEnum } from '../../models/filter';
+import { FilterEnum } from '../../models/filter.enum';
 import { ITodo } from '../../models/todo';
 
 @Component({

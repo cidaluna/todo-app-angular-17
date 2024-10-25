@@ -39,4 +39,39 @@ export class TodoService {
     // Muda o filtro ativo, e avisa/emite um novo valor para todos os observadores inscritos.
     this.filter$.next(filterName);
   }
+
+  changeTodo(id: string, title: string): void{
+    const updatedTodos = this.todos$.getValue().map(
+      (todo) => {
+        if(todo.id === id){
+          return {
+            ...todo,
+            title,
+          };
+        }
+        return todo;
+      });
+    this.todos$.next(updatedTodos);
+  }
+
+  removeTodo(id: string): void{
+    const updatedTodos = this.todos$.getValue().filter(
+      (todo) => todo.id !== id);
+    this.todos$.next(updatedTodos);
+  }
+
+  toggleTodo(id: string): void{
+    // se estiver checked o contador items left decrementa atualizando
+    const updatedTodos = this.todos$.getValue().map(
+      (todo) => {
+        if(todo.id === id){
+          return {
+            ...todo,
+            isCompleted: !todo.isCompleted,
+          };
+        }
+        return todo;
+    });
+    this.todos$.next(updatedTodos);
+  }
 }

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 import { FilterEnum } from '../../shared/models/filter.enum';
 import { ITodo } from '../../shared/models/todo';
 
@@ -8,70 +8,71 @@ import { ITodo } from '../../shared/models/todo';
 })
 export class TodoService {
 
-  todos$ = new BehaviorSubject<ITodo[]>([]);
-  filter$ = new BehaviorSubject<FilterEnum>(FilterEnum.all);
+  todos = signal<ITodo[]>([]);
+  filter = signal<FilterEnum>(FilterEnum.all);
 
+   /**
+   * Adiciona um novo todo à lista.
+   * @param title - Título da nova tarefa a ser adicionada.
+   */
   addTodo(title: string): void{
     const newTodo: ITodo = {
       title,
       isCompleted: false,
-      id: Math.random().toString(16),
+      id: uuidv4(), // Gerar um UUID em vez de usar Math.random()
     };
-    const updatedTodos = [...this.todos$.getValue(), newTodo];
-    this.todos$.next(updatedTodos);
+    // Atualiza a lista de todos adicionando o novo todo
+    this.todos.update(todos => [...todos, newTodo]);
   }
 
+  /**
+   * Alterna o estado de conclusão de todas as tarefas para um valor booleano específico.
+   * @param isCompleted - Define se todas as tarefas devem ser marcadas como concluídas ou não.
+   */
   toggleAll(isCompleted: boolean): void{
     console.log('isCompleted: ', isCompleted);
-    const updatedTodos = this.todos$.getValue().map(
-      (todo) => {
-        return {
-          ...todo,
-          isCompleted,
-        };
-      }
+    this.todos.update(todos =>
+      todos.map(todo => ({
+        ...todo,
+        isCompleted,
+      }))
     );
-    this.todos$.next(updatedTodos);
-    console.log('updatedTodos: ', updatedTodos);
   }
 
   changeFilter(filterName: FilterEnum): void{
     // Muda o filtro ativo, e avisa/emite um novo valor para todos os observadores inscritos.
-    this.filter$.next(filterName);
+    this.filter.set(filterName);
   }
 
+  /**
+   * Modifica o título de uma tarefa específica.
+   * @param id - O ID da tarefa que será modificada.
+   * @param title - O novo título da tarefa.
+   */
   changeTodo(id: string, title: string): void{
-    const updatedTodos = this.todos$.getValue().map(
-      (todo) => {
-        if(todo.id === id){
-          return {
-            ...todo,
-            title,
-          };
-        }
-        return todo;
-      });
-    this.todos$.next(updatedTodos);
+    this.todos.update(todos =>
+      todos.map(todo => todo.id === id ? { ...todo, title } : todo)
+    );
   }
 
+   /**
+   * Remove uma tarefa específica da lista.
+   * @param id - O ID da tarefa a ser removida.
+   */
   removeTodo(id: string): void{
-    const updatedTodos = this.todos$.getValue().filter(
-      (todo) => todo.id !== id);
-    this.todos$.next(updatedTodos);
+    this.todos.update(todos =>
+      todos.filter(todo => todo.id !== id)
+    );
   }
 
+  /**
+   * Alterna o estado de conclusão de uma tarefa específica.
+   * @param id - O ID da tarefa a ser alternada.
+   */
   toggleTodo(id: string): void{
     // se estiver checked o contador items left decrementa atualizando
-    const updatedTodos = this.todos$.getValue().map(
-      (todo) => {
-        if(todo.id === id){
-          return {
-            ...todo,
-            isCompleted: !todo.isCompleted,
-          };
-        }
-        return todo;
-    });
-    this.todos$.next(updatedTodos);
+    this.todos.update(todos =>
+      todos.map(todo => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo)
+    );
   }
 }

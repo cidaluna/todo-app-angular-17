@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { TodoService } from '../../../core/services/todo.service';
 
 @Component({
@@ -6,28 +6,31 @@ import { TodoService } from '../../../core/services/todo.service';
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  title: string = '';
+  title = signal<string>('');
 
   constructor(private _todoService: TodoService){
-    this._todoService.todos$.subscribe(todos => {
-      console.log('todos: ', todos);
-    })
+    // Usando `effect` para reagir às mudanças nos `todos`
+    effect(() => {
+      const todos = this._todoService.todos();
+      console.log('todos:', todos);
+    });
   }
 
   changeText(event: Event): void{
     const inputElement = event.target as HTMLInputElement;
-    this.title = inputElement.value.trim();
+    this.title.set(inputElement.value.trim());
   }
 
   add(): void{
-    if(!this.title || this.title.trim() === ""){
+    const currentTitle = this.title();
+    if (!currentTitle || currentTitle.trim() === "") {
       return;
     }
-    console.log('addTodo:', this.title);
-    this._todoService.addTodo(this.title);
-    this.title = "";
+    console.log('addTodo:', currentTitle);
+    this._todoService.addTodo(currentTitle);
+    this.title.set(""); // Limpa o título após adicionar
   }
 }

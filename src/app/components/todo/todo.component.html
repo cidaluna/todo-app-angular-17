@@ -1,16 +1,19 @@
 <li [ngClass]="{editing: isEditingProps}">
   <div class="view">
-    <input type="checkbox" class="toggle" id="title"
+    <input type="checkbox" class="toggle"
+    [id]="'title-' + todoProps.id"
     [checked]="todoProps.isCompleted"
     (change)="toggleTodo()"
     />
-    <label for="title" (dblclick)="setTodoInEditMode()">{{ todoProps.title }}</label>
+    <label for="'title-' + todoProps.id" (dblclick)="setTodoInEditMode()">{{ todoProps.title }}</label>
     <button class="destroy" (click)="removeTodo()"></button>
   </div>
   <ng-container *ngIf="isEditingProps">
     <input type="text" class="edit"
     #textInput
-    [value]="editingText" (keyup)="changeText($event)"
-    (keyup.enter)="changeTodo()">
+    [value]="editingText()"
+    (input)="changeText($event)"
+    (keyup.enter)="changeTodo()" >
+    <!-- ao inves do (keyup)="changeText($event)" usar o input para pegar em tempo real -->
   </ng-container>
 </li>

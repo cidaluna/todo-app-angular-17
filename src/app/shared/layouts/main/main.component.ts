@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
+import { TodoComponent } from "../../../components/todo/todo.component";
+import { TodosComponent } from '../../../components/todos/todos.component';
 import { TodoService } from '../../../core/services/todo.service';
-import { TodoComponent } from "../../../pages/todo/todo.component";
-import { TodosComponent } from '../../../pages/todos/todos.component';
 import { FilterEnum } from '../../models/filter.enum';
 import { ITodo } from '../../models/todo';
 

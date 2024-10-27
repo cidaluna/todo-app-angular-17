@@ -8,7 +8,7 @@ import { ITodo } from '../../shared/models/todo';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss'
+  styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit, OnChanges {
   @Input('todo') todoProps!: ITodo;

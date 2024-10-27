@@ -11,7 +11,7 @@ import { MaterialModule } from '../../shared/material/material/material.module';
   standalone: true,
   imports: [CommonModule, MaterialModule, RouterOutlet, HeaderComponent, MainComponent, FooterComponent],
   templateUrl: './todos.component.html',
-  styleUrl: './todos.component.scss'
+  styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent{
 

@@ -8,7 +8,7 @@ import { FilterEnum } from '../../models/filter.enum';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
   // Expondo o enum para o template para facilitar a comparação

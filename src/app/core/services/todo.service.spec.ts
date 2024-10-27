@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TodoService } from './todo.service';
 
-describe('TodoService', () => {
+describe('Todo Service', () => {
   let service: TodoService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('TodoService', () => {
     service = TestBed.inject(TodoService);
   });
 
-  it('should be created', () => {
+  it('should be created Todo Service', () => {
     expect(service).toBeTruthy();
   });
 });

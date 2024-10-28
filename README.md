@@ -45,12 +45,12 @@ Tela da aplicação ToDo List Angular:
 
 2. **Build a aplicação para ambiente de produção (gera o HTML,CSS,JS)**
   ```bash
-    ng build --output-path=dist --base-href="/todo-app-angular-17/"
+    ng build --output-path=dist/todo-app-angular-17 --base-href="/todo-app-angular-17/"
   ```
 
 3. **Publique o projeto no GitHub Pages**
   ```bash
-    ngh --dir=dist/browser
+    ngh --dir=dist/todo-app-angular-17/browser
   ```
 
 

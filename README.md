@@ -34,3 +34,27 @@ To Do App é uma aplicação de gerenciamento de tarefas desenvolvida em Angular
 Tela da aplicação ToDo List Angular:
 
 ![todo list](./src/assets/todo-list-app-angular.PNG)
+
+
+## Deploy no GitHub Pages
+
+1. **Instale o GitHub Pages Tool**
+  ```bash
+    npm install -g angular-cli-ghpages
+  ```
+
+2. **Build a aplicação para ambiente de produção (gera o HTML,CSS,JS)**
+  ```bash
+    ng build --output-path=dist --base-href="/todo-app-angular-17/"
+  ```
+
+3. **Publique o projeto no GitHub Pages**
+  ```bash
+    ngh --dir=dist/browser
+  ```
+
+
+### After new changes
+
+ng build --output-path=dist --base-href="/todo-app-angular-17/"
+ngh --dir=dist/browser

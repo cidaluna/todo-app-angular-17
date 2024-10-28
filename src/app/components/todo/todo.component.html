@@ -13,7 +13,9 @@
     #textInput
     [value]="editingText()"
     (input)="changeText($event)"
-    (keyup.enter)="changeTodo()" >
+    (keyup.enter)="changeTodo()"
+    (blur)="changeTodo()"
+    />
     <!-- ao inves do (keyup)="changeText($event)" usar o input para pegar em tempo real -->
   </ng-container>
 </li>

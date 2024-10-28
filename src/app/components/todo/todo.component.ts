@@ -17,6 +17,7 @@ export class TodoComponent implements OnInit, OnChanges {
   // Inicializa o signal com um valor vazio
   editingText = signal<string>('');
   @ViewChild('textInput')textInput!: ElementRef;
+  isProcessing: boolean = false; // controlar se o metodo changeTodo ja foi chamado
 
   constructor(private _todoService: TodoService){}
 
@@ -59,8 +60,15 @@ export class TodoComponent implements OnInit, OnChanges {
 
   changeTodo():void{
     console.log('changeTodo:', this.editingText);
+    if (this.isProcessing){
+      return; // Se já estiver processando, sai da função
+    }
+    this.isProcessing = true;
     this._todoService.changeTodo(this.todoProps.id, this.editingText()); // passa o id e o title
     this.setEditingIdEvent.emit(null); // o null fecha o modo edit
+    setTimeout(() =>
+      this.isProcessing = false
+    , 100); // Reseta a flag após um tempo curto
   }
 
 }

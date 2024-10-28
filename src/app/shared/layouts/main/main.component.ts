@@ -38,10 +38,10 @@ export class MainComponent {
   );
 
   constructor(private _todoService: TodoService) {
-    // Efeito para monitorar mudanças nos todos e no filtro
+    // O `effect` é uma função reativa e se reexecuta sempre que ocorre mudanças nos todos e no filtro
     effect(() => {
-      console.log('Todos:', this._todoService.todos());
-      console.log('Filter:', this._todoService.filter());
+      console.log('MainComponent: Lista Todos:', this._todoService.todos());
+      console.log('MainComponent: Lista Filter:', this._todoService.filter());
     });
   }
 

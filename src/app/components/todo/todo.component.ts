@@ -38,33 +38,33 @@ export class TodoComponent implements OnInit, OnChanges {
   }
 
   setTodoInEditMode(): void{
-    console.log('setTodoInEditMode');
+    console.log('TodoComponent: Recebeu evento para editar o texto!');
     this.setEditingIdEvent.emit(this.todoProps.id);
   }
 
   removeTodo():void{
     this._todoService.removeTodo(this.todoProps.id);
-    console.log('removeTodo');
+    console.log('TodoComponent: Chamado o remove Todo.');
   }
 
   toggleTodo():void{
-    console.log('toggleTodo');
+    console.log('TodoComponent: Alterado o check do Todo!');
     this._todoService.toggleTodo(this.todoProps.id);
   }
 
   changeText(event: Event):void{
     const value = (event.target as HTMLInputElement).value;
     this.editingText.set(value);
-    console.log('changeText');
+    console.log('TodoComponent: Houve alteração no texto');
   }
 
   changeTodo():void{
-    console.log('changeTodo:', this.editingText);
     if (this.isProcessing){
       return; // Se já estiver processando, sai da função
     }
     this.isProcessing = true;
     this._todoService.changeTodo(this.todoProps.id, this.editingText()); // passa o id e o title
+    console.log('TodoComponent: Retorno após o service: ', this.editingText());
     this.setEditingIdEvent.emit(null); // o null fecha o modo edit
     setTimeout(() =>
       this.isProcessing = false

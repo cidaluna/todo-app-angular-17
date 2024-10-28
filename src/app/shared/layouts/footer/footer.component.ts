@@ -36,7 +36,7 @@ export class FooterComponent {
   // Método para mudar o filtro
   changeFilter(event: Event, filterName: FilterEnum) {
     event.preventDefault();
-    console.log('changeFilter:', filterName);
     this._todoService.changeFilter(filterName);
+    console.log(`FooterComponent: filtro ${filterName} alterado!`);
   }
 }

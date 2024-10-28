@@ -12,10 +12,9 @@ export class HeaderComponent {
   title = signal<string>('');
 
   constructor(private _todoService: TodoService){
-    // Usando `effect` para reagir às mudanças nos `todos`
+    // O `effect` é uma função reativa e se reexecuta sempre que ocorre mudanças na lista de `todos`
     effect(() => {
-      const todos = this._todoService.todos();
-      console.log('todos:', todos);
+      this._todoService.todos();
     });
   }
 
@@ -29,7 +28,7 @@ export class HeaderComponent {
     if (!currentTitle || currentTitle.trim() === "") {
       return;
     }
-    console.log('addTodo:', currentTitle);
+    console.log('HeaderComponent: Input Adicionando Todo:', currentTitle);
     this._todoService.addTodo(currentTitle);
     this.title.set(""); // Limpa o título após adicionar
   }

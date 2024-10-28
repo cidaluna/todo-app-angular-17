@@ -16,13 +16,19 @@ export class TodoService {
    * @param title - Título da nova tarefa a ser adicionada.
    */
   addTodo(title: string): void{
-    const newTodo: ITodo = {
-      title,
-      isCompleted: false,
-      id: uuidv4(), // Gerar um UUID em vez de usar Math.random()
-    };
-    // Atualiza a lista de todos adicionando o novo todo
-    this.todos.update(todos => [...todos, newTodo]);
+    try{
+      const newTodo: ITodo = {
+        title,
+        isCompleted: false,
+        id: uuidv4(), // Gerar um UUID em vez de usar Math.random()
+      };
+      // Atualiza a lista de todos adicionando o novo todo
+      this.todos.update(todos => [...todos, newTodo]);
+      console.log("Service: adicionou!")
+    }catch(error){
+      console.error('Service: erro no addTodo.', error);
+      this.showErrorMessage('Ocorreu um erro! Por favor, tente novamente mais tarde.');
+    }
   }
 
   /**
@@ -50,9 +56,15 @@ export class TodoService {
    * @param title - O novo título da tarefa.
    */
   changeTodo(id: string, title: string): void{
-    this.todos.update(todos =>
-      todos.map(todo => todo.id === id ? { ...todo, title } : todo)
-    );
+    try{
+      this.todos.update(todos =>
+        todos.map(todo => todo.id === id ? { ...todo, title } : todo)
+      );
+      console.log("Service: fez a atualização!")
+    }catch(error){
+      console.error('Service: erro no changeTodo.', error);
+      this.showErrorMessage('Ocorreu um erro! Por favor, tente novamente mais tarde.');
+    }
   }
 
    /**
@@ -60,9 +72,15 @@ export class TodoService {
    * @param id - O ID da tarefa a ser removida.
    */
   removeTodo(id: string): void{
-    this.todos.update(todos =>
-      todos.filter(todo => todo.id !== id)
-    );
+    try{
+      this.todos.update(todos =>
+        todos.filter(todo => todo.id !== id)
+      );
+      console.log('Service: removeu um Todo!')
+    }catch(error){
+      console.error('Service: erro no removeTodo.', error);
+      this.showErrorMessage('Ocorreu um erro! Por favor, tente novamente mais tarde.');
+    }
   }
 
   /**
@@ -75,4 +93,9 @@ export class TodoService {
       todos.map(todo => todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo)
     );
   }
+
+    // Função para mostrar mensagens de erro
+    showErrorMessage(message: string): void {
+      console.log(message);
+    }
 }

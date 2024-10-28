@@ -54,7 +54,11 @@ Tela da aplicação ToDo List Angular:
   ```
 
 
-### After new changes
+### Depois de novas mudanças
+  ```bash
+    ng build --output-path=dist/todo-app-angular-17 --base-href="/todo-app-angular-17/"
+  ```
 
-ng build --output-path=dist --base-href="/todo-app-angular-17/"
-ngh --dir=dist/browser
+  ```bash
+    ngh --dir=dist/todo-app-angular-17/browser
+  ```
